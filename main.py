@@ -1,14 +1,25 @@
-import sqlite3
+from functions import *
+
+
+tasks = {4: task_4}
 
 
 def main():
-    connection = sqlite3.connect('tasks.sqlite')
-    cursor = connection.cursor()
+    info()
+    while True:
+        command = input()
+        if not command.isdigit():
+            print('Неверный ввод')
+            continue
 
-    # code of program will be here
+        command = int(command)
+        if command in tasks:
+            tasks[command]()
+        else:
+            print('Такого задания нет')
+        print('\n')
+        info()
 
-    connection.close()
 
-
-if __name__ == 'main':
+if __name__ == '__main__':
     main()
