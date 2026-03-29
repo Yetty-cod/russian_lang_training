@@ -1,13 +1,18 @@
 import sqlite3
 from random import choice, randint
+from colorama import Fore, Back, Style, init
+
+# Инициализация colorama(необходима для Windows)
+init(autoreset=True)
 
 
 def info():
     print('Добро пожаловать в тренажёр! Выберите номер задания:')
     print('4 - постановка ударения')
-    print('9 - орфограммы в корне')
+    print('9 - корни')
+    print('10 - приставки')
 
-    print('Для возвращения в меню используйте команду /exit')
+    print('Для возвращения в меню используйте команду /выход')
 
 
 def load_from_db(task):
@@ -37,19 +42,19 @@ def task_4():
         print('\t'.join(s))
 
         answer = input()
-        if answer == '/exit':
+        if answer == '/выход':
             return
         while not answer.isdigit() or int(answer) not in [1, 2]:
-            print('Неверный ввод')
+            print(Fore.YELLOW + 'Неверный ввод')
             answer = input()
-            if answer == '/exit':
+            if answer == '/выход':
                 return
 
         answer = int(answer) - 1
         if answer == num:
-            print('Верно V')
+            print(Fore.GREEN + 'Верно V')
         else:
-            print('Неверно X')
+            print(Fore.RED + 'Неверно X')
         print('Правильно -', correct_word)
         print('-' * 15)
 
@@ -66,17 +71,45 @@ def task_9():
 
         print(word)
         answer = input()
-        if answer == '/exit':
+        if answer == '/выход':
             return
         while not answer.isalpha() or len(answer) != 1:
-            print('Неверный ввод')
+            print(Fore.YELLOW + 'Неверный ввод')
             answer = input()
-            if answer == '/exit':
+            if answer == '/выход':
                 return
 
         if answer == letter:
-            print('Верно V')
+            print(Fore.GREEN + 'Верно V')
         else:
-            print('Неверно X')
+            print(Fore.RED + 'Неверно X')
+        print('Правильно -', word.replace('..', letter))
+        print('-' * 15)
+
+
+def task_10():
+    print('Начинается тренировка по 10 заданию')
+    print('Для выбора варианта ответа введите букву, которая должна стоять в пропуске\n')
+
+    data = load_from_db(10)
+    while True:
+        question = choice(data)
+        word = question[1]
+        letter = question[2]
+
+        print(word)
+        answer = input()
+        if answer == '/выход':
+            return
+        while not answer.isalpha() or len(answer) != 1:
+            print(Fore.YELLOW + 'Неверный ввод')
+            answer = input()
+            if answer == '/выход':
+                return
+
+        if answer == letter:
+            print(Fore.GREEN + 'Верно V')
+        else:
+            print(Fore.RED + 'Неверно X')
         print('Правильно -', word.replace('..', letter))
         print('-' * 15)

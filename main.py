@@ -2,7 +2,8 @@ from functions import *
 
 
 tasks = {4: task_4,
-         9: task_9}
+         9: task_9,
+         10: task_10}
 
 
 def main():
@@ -10,14 +11,15 @@ def main():
     while True:
         command = input()
         if not command.isdigit():
-            print('Неверный ввод')
+            print(Fore.YELLOW + 'Неверный ввод')
             continue
 
         command = int(command)
         if command in tasks:
+            print()
             tasks[command]()
         else:
-            print('Такого задания нет')
+            print(Fore.YELLOW + 'Такого задания нет')
         print('\n')
         info()
 
