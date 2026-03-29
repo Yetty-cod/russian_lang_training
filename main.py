@@ -3,7 +3,8 @@ from functions import *
 
 tasks = {4: task_4,
          9: task_9,
-         10: task_10}
+         10: task_10,
+         11: task_11}
 
 
 def main():

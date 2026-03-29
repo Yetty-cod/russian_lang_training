@@ -11,6 +11,7 @@ def info():
     print('4 - постановка ударения')
     print('9 - корни')
     print('10 - приставки')
+    print('11 - суффиксы')
 
     print('Для возвращения в меню используйте команду /выход')
 
@@ -92,6 +93,34 @@ def task_10():
     print('Для выбора варианта ответа введите букву, которая должна стоять в пропуске\n')
 
     data = load_from_db(10)
+    while True:
+        question = choice(data)
+        word = question[1]
+        letter = question[2]
+
+        print(word)
+        answer = input()
+        if answer == '/выход':
+            return
+        while not answer.isalpha() or len(answer) != 1:
+            print(Fore.YELLOW + 'Неверный ввод')
+            answer = input()
+            if answer == '/выход':
+                return
+
+        if answer == letter:
+            print(Fore.GREEN + 'Верно V')
+        else:
+            print(Fore.RED + 'Неверно X')
+        print('Правильно -', word.replace('..', letter))
+        print('-' * 15)
+
+
+def task_11():
+    print('Начинается тренировка по 11 заданию')
+    print('Для выбора варианта ответа введите букву, которая должна стоять в пропуске\n')
+
+    data = load_from_db(11)
     while True:
         question = choice(data)
         word = question[1]
