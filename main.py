@@ -1,7 +1,8 @@
 from functions import *
 
 
-tasks = {4: task_4}
+tasks = {4: task_4,
+         9: task_9}
 
 
 def main():

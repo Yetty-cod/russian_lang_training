@@ -5,6 +5,7 @@ from random import choice, randint
 def info():
     print('Добро пожаловать в тренажёр! Выберите номер задания:')
     print('4 - постановка ударения')
+    print('9 - орфограммы в корне')
 
     print('Для возвращения в меню используйте команду /exit')
 
@@ -50,4 +51,32 @@ def task_4():
         else:
             print('Неверно X')
         print('Правильно -', correct_word)
+        print('-' * 15)
+
+
+def task_9():
+    print('Начинается тренировка по 9 заданию')
+    print('Для выбора варианта ответа введите букву, которая должна стоять в пропуске\n')
+
+    data = load_from_db(9)
+    while True:
+        question = choice(data)
+        word = question[1]
+        letter = question[2]
+
+        print(word)
+        answer = input()
+        if answer == '/exit':
+            return
+        while not answer.isalpha() or len(answer) != 1:
+            print('Неверный ввод')
+            answer = input()
+            if answer == '/exit':
+                return
+
+        if answer == letter:
+            print('Верно V')
+        else:
+            print('Неверно X')
+        print('Правильно -', word.replace('..', letter))
         print('-' * 15)
