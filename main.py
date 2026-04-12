@@ -15,6 +15,8 @@ def main():
             print(Fore.YELLOW + 'Неверный ввод')
             continue
 
+        command = int(command)
+
         if command in tasks:
             print()
             tasks[command]()
